@@ -9,10 +9,6 @@ $enabled_opacity: 0.75;
 $hint_opacity: 0.6;
 $disabled_opacity: 0.4;
 
-@function gtkalpha($c, $a) {
-  @return unquote("alpha(#{$c}, #{$a})");
-}
-
 @function scale-alpha($c, $a) {
   @return scale-color($c, $alpha: percentage(-1 + $a));
 }
@@ -35,18 +31,25 @@ $insensitive_secondary_selected_fg_color: scale-alpha($secondary_selected_fg_col
 $insensitive_tertiary_selected_fg_color: scale-alpha($tertiary_selected_fg_color, $disabled_opacity);
 
 // Background colors
-$bg_color: if($variant == 'light', #F5F5F5, #545454);
-$base_color: if($variant == 'light', #FFFFFF, #545454);
-$secondary_base_color: mix($base_color, $bg_color, 50%);
-$light_color: if($variant =='light', #FAFAFA, #757575);
-$headerbar_color: if($variant =='light', #545454, #434343);
+$base_color: scale-alpha(if($variant == 'light', #FFFFFF, #545454), $higher_opacity + 0.05);
+$secondary_base_color: scale-alpha($fg_color, 0.05);
+$bg_color: scale-alpha(#000000, $middle_opacity);
+$osd_bg_color: scale-alpha(#000000, $lower_opacity);
+$overview_bg_color: scale-alpha(#FFFFFF, 0.1);
 
 $selected_bg_color: #9b9b9b;
 $secondary_selected_bg_color: #9f9f9f;
 $accent_bg_color: #9f9f9f;
 
 // Misc colors
-$track_color: gtkalpha(currentColor, $lower_opacity);
+$track_color: scale-alpha($fg_color, $lower_opacity);
+$semi_track_color: scale-alpha($fg_color, $lower_opacity / 2);
+$insensitive_track_color: scale-alpha($insensitive_fg_color, $lower_opacity);
+
+$selected_track_color: scale-alpha($selected_fg_color, $lower_opacity);
+$selected_semi_track_color: scale-alpha($selected_fg_color, $lower_opacity / 2);
+$selected_insensitive_track_color: scale-alpha($insensitive_selected_fg_color, $lower_opacity);
+
 $borders_color: if($variant == 'light', scale-alpha(#000000, 0.1), scale-alpha(#000000, 0.2));
 $highlight_color: if($variant == 'light', scale-alpha(#FFFFFF, 0.4), scale-alpha(#FFFFFF, 0.1));
 $secondary_highlight_color: scale-alpha(#FFFFFF, 0.2);
@@ -65,3 +68,4 @@ $info_bg_color: #66BB6A;
 $question_bg_color: #9b9b9b;
 $warning_bg_color: #FFA726;
 $error_bg_color: #EF5350;
+

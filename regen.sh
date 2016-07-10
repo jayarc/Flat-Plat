@@ -10,7 +10,7 @@ cd ~/.themes/Arx/gtk-3.0/
 
 rm -R assets/*
 
-./gtk-3.0/render-assets/sh
+./render-assets.sh
 
 cd ~/.themes/Arx/gnome-shell/
 
